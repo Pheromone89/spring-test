@@ -28,6 +28,6 @@ public class GreetingController {
     	data.add("Malaysia");
     	data.add("Brunei");
     	data.add("Timor Leste");
-       	return data.stream().filter(line -> line.contains(prefix)).collect(Collectors.toList());    	
+       	return data.stream().filter(line -> line.startsWith(prefix)).collect(Collectors.toList());    	
     }
 }
