@@ -13,6 +13,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.EntityManagerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,9 +32,21 @@ public class GreetingController {
 
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
+        return x;
     }
+    
+    @Autowired
+    @Qualifier("def")
+    private Greeting x;
+    
+    @Autowired
+    private EntityManagerFactory em;
+    
+    @RequestMapping("/actors")
+    public List<Actor> allActors(){
+    	return em.createEntityManager().createQuery("from Actor").getResultList();
+    }
+    
     
     @RequestMapping("/data")
     public List<String> dataNegara(@RequestParam("contain") String prefix){
@@ -48,6 +64,7 @@ public class GreetingController {
     URL url = new URL ("http://www.webservicex.net/country.asmx/GetCountries");
     	// buka koneksi
     URLConnection connection = url.openConnection();
+// 	  kalo method get
 //    connection.setDoInput(true);
 //    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 //    connection.setRequestProperty("Content-Length", "0");
