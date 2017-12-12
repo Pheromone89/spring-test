@@ -1,0 +1,27 @@
+<link href="jquery-ui.css" rel="stylesheet">
+<script src="external/jquery/jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.getJSON("http://localhost:5050/actors/", function( data ) { 
+			var nama =[];
+			$.each(data, function (i, row){
+				nama[i] = row.firstName+" "+row.lastName
+			});
+			$("#inputActor").autocomplete({
+				source : nama
+			});
+		});
+		$.getJSON("http://localhost:5050/films/", function( data ) { 
+			var film =[];
+			$.each(data, function (i, row){
+				film[i] = row.title
+			});
+			$("#inputFilm").autocomplete({
+				source : film
+			});
+		});
+	});
+</script>
+<input id="inputFilm" placeholder="input film title here"/>
+<input id="inputActor" placeholder="input actor name's here"/>

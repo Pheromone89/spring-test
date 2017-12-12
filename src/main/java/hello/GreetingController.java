@@ -18,6 +18,7 @@ import javax.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,11 +43,27 @@ public class GreetingController {
     @Autowired
     private EntityManagerFactory em;
     
+    @CrossOrigin(origins= {"*"})
     @RequestMapping("/actors")
     public List<Actor> allActors(){
     	return em.createEntityManager().createQuery("from Actor").getResultList();
     }
+
+    @CrossOrigin(origins= {"*"})
+    @RequestMapping("/films")
+    public List<Film> allFilms(){
+    	return em.createEntityManager().createQuery("from Film").getResultList();
+    }
     
+    @RequestMapping("/languages")
+    public List<Language> allLanguages(){
+    	return em.createEntityManager().createQuery("from Language").getResultList();
+    }
+    
+    @RequestMapping("/filmactors")
+    public List<FilmActor> allFilmActors(){
+    	return em.createEntityManager().createQuery("from FilmActor").getResultList();
+    }
     
     @RequestMapping("/data")
     public List<String> dataNegara(@RequestParam("contain") String prefix){

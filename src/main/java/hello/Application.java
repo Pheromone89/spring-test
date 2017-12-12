@@ -18,6 +18,6 @@ public class Application {
     
     @Bean("def")
     public Greeting sample2() {
-    	return new Greeting (19, "NKKK");
+    	return new Greeting (19, "NKK");
     }
 }

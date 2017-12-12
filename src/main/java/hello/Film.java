@@ -23,6 +23,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -94,10 +95,10 @@ public class Film implements Serializable {
     private Date lastUpdate;
     @JoinColumn(name = "language_id", referencedColumnName = "language_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Language languageId;
+    private transient Language languageId;
     @JoinColumn(name = "original_language_id", referencedColumnName = "language_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Language originalLanguageId;
+    private transient Language originalLanguageId;
 
     public Film() {
     }
